@@ -4,11 +4,15 @@
 #include <iostream>
 #include <string.h>
 #include<string>
+
 using namespace std;
+
 void del_space(char *s);
 void normalize(char*s);
-int get_number_by_string(char *s);
-int calculate(char* s);
+int get_number_by_string(string s);
+int calculate(string s);
+string get_left_substring(string s, int pos);
+string get_right_substring(string s, int pos);
 int main(int argc,char*argv[])
 {
     char*s=argv[1];
@@ -17,12 +21,13 @@ int main(int argc,char*argv[])
     {
         del_space(s);
         normalize(s);
+        string str(s);
+        cout<<calculate(str);
 
-        cout << calculate(s);
     }
-    catch(const char *st)
+    catch(const exception& ex)
     {
-        cout << st;
+        cout << ex.what();
         return -1;
     }
 
@@ -41,20 +46,18 @@ void del_space(char*s)
             sprintf(sc+strlen(sc),"%c",s[i]);
             if(s[i]!='+'&&s[i]!='-'&&s[i]!='/'&&s[i]!='*'&&(s[i]>'9'||s[i]<'0'))
             {
-
-                throw("Error");
+               throw(runtime_error("invalid input"));
             }
         }
-
     }
     sprintf(s,"%s",sc);
     delete[]sc;
-
 }
-int get_number_by_string(char*s)
+int get_number_by_string(string s)
 {
     int res=0;int key=1;
-    for(int i=0;i<strlen(s);i++)
+    int len=s.size();
+    for(int i=0;i<len;i++)
     {
         if(s[i]=='-')
         {
@@ -69,75 +72,55 @@ int get_number_by_string(char*s)
         {
             res=res*10+s[i]-(int)'0';
         }
-
     }
     //printf("res=%d\n",key*res);
     return key*res;
 }
-int calculate(char*s)
+int calculate(string s)
 {
     //printf("%s %d\n",s,strlen(s));
+    //cout << s <<"result=";
     int left,right;
-    char*tt;
-    char*tt1=new char[strlen(s)];
-    if(strlen(s)==0)
+
+    if(s.size()==0)
     {
-        throw("Error");
+        throw(runtime_error("invalid input"));
+        return 0;
     }
-    if(strchr(s,'+')!=NULL)
+    if(s.find('+')!=string::npos)
     {
-        tt=new char[strlen(s)-strlen(strchr(s,'+'))+1];
-        tt[strlen(s)-strlen(strchr(s,'+'))]='\0';
-        strncpy(tt,s,(int)(strlen(s)-strlen(strchr(s,'+'))));
-        left=calculate(tt);
-        strcpy(tt1,strchr(s,'+')+1);
-        right=calculate(tt1);
-        delete[]tt;
-        delete[]tt1;
+        left=calculate(get_left_substring(s,s.find('+')));
+        right=calculate(get_right_substring(s,s.find('+')));
+        //cout <<s <<"res="<< left+right << endl;
         return left+right;
     }
-    if(strchr(s,'*')==NULL&&strchr(s,'/')==NULL)
+    if(s.find('*')==string::npos&&s.find('/')==string::npos)
     {
-
+//        cout << s<< "res="<< get_number_by_string(s) << endl;
         return get_number_by_string(s);
     }
-    if(strchr(s,'/')==NULL)
+    if(s.find('/')==string::npos)
     {
-        tt=new char[strlen(s)-strlen(strchr(s,'*'))+1];
-        tt[strlen(s)-strlen(strchr(s,'*'))]='\0';
-        strncpy(tt,s,(int)(strlen(s)-strlen(strchr(s,'*'))));
-        left=get_number_by_string(tt);
-        strcpy(tt1,strchr(s,'*')+1);
-        right=calculate(tt1);
-        delete[]tt;
-        delete[]tt1;
+        left=calculate(get_left_substring(s,s.find('*')));
+        right=calculate(get_right_substring(s,s.find('*')));
+      //  cout <<s<<"res="<< left*right << endl;
         return left*right;
     }
-    if(strchr(strrchr(s,'/'),'*')!=NULL)
+    if(get_right_substring(s,s.rfind('/')).find('*')!=string::npos)
     {
-        tt=new char[strlen(s)-strlen(strchr(strrchr(s,'/'),'*'))+1];
-        tt[strlen(s)-strlen(strchr(strrchr(s,'/'),'*'))]='\0';
-        strncpy(tt,s,(int)(strlen(s)-strlen(strchr(strrchr(s,'/'),'*'))));
-        left=calculate(tt);
-        strcpy(tt1,strchr(strrchr(s,'/'),'*')+1);
-        right=calculate(tt1);
-        delete[]tt;
-        delete[]tt1;
+        string sr=get_right_substring(s,s.rfind('/'));
+        left=calculate(get_left_substring(s,s.rfind('/')+sr.find('*')+1));
+        right=calculate(get_right_substring(sr,sr.find('*')));
+    //    cout <<s<<"res="<< left*right << endl;
         return left*right;
     }
-    tt=new char[strlen(s)-strlen(strrchr(s,'/'))+1];
-    tt[strlen(s)-strlen(strrchr(s,'/'))]='\0';
-    strncpy(tt,s,(int)(strlen(s)-strlen(strrchr(s,'/'))));
-    //printf("it:%s eee %d %d\n",s,(int)strlen(s),(int)strlen(strrchr(s,'/')));
-    left=calculate(tt);
-    strcpy(tt1,strrchr(s,'/')+1);
-    right=get_number_by_string(tt1);
-    delete[]tt;
-    delete[]tt1;
+    left=calculate(get_left_substring(s,s.rfind('/')));
+    right=calculate(get_right_substring(s,s.rfind('/')));
     if(right==0)
     {
-        throw("Error");
+        throw(runtime_error("division by zero"));
     }
+  //  cout<< s<<"res="<<left/right << endl;
     return left/right;
 }
 void normalize(char*s)
@@ -163,8 +146,15 @@ void normalize(char*s)
     delete[]sc;
 }
 
+string get_left_substring(string s, int pos)
+{
+    return s.substr(0,pos);
+}
 
-
+string get_right_substring(string s, int pos)
+{
+    return s.substr(pos+1, s.size()-pos-1);
+}
 
 
 
