@@ -1,0 +1,255 @@
+==20429== Memcheck, a memory error detector
+==20429== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==20429== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==20429== Command: ./calc 1+1
+==20429== Parent PID: 19866
+==20429== 
+--20429-- 
+--20429-- Valgrind options:
+--20429--    --leak-check=full
+--20429--    --show-leak-kinds=all
+--20429--    --track-origins=yes
+--20429--    --verbose
+--20429--    --log-file=valgrind-out.txt
+--20429-- Contents of /proc/version:
+--20429--   Linux version 4.8.0-59-generic (buildd@lcy01-03) (gcc version 6.2.0 20161005 (Ubuntu 6.2.0-5ubuntu12) ) #64-Ubuntu SMP Thu Jun 29 19:38:34 UTC 2017
+--20429-- 
+--20429-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx
+--20429-- Page sizes: currently 4096, max supported 4096
+--20429-- Valgrind library directory: /usr/lib/valgrind
+--20429-- Reading syms from /home/osboxes/Tehnosphere/Git/01/calc
+--20429-- Reading syms from /lib/x86_64-linux-gnu/ld-2.24.so
+--20429--   Considering /lib/x86_64-linux-gnu/ld-2.24.so ..
+--20429--   .. CRC mismatch (computed b7a35e9a wanted f2066424)
+--20429--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.24.so ..
+--20429--   .. CRC is valid
+--20429-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--20429--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--20429--   .. CRC mismatch (computed eea41ea9 wanted 2009db78)
+--20429--    object doesn't have a symbol table
+--20429--    object doesn't have a dynamic symbol table
+--20429-- Scheduler: using generic scheduler lock implementation.
+--20429-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==20429== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-20429-by-osboxes-on-???
+==20429== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-20429-by-osboxes-on-???
+==20429== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-20429-by-osboxes-on-???
+==20429== 
+==20429== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==20429== don't want to do, unless you know exactly what you're doing,
+==20429== or are doing some strange experiment):
+==20429==   /usr/lib/valgrind/../../bin/vgdb --pid=20429 ...command...
+==20429== 
+==20429== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==20429==   /path/to/gdb ./calc
+==20429== and then give GDB the following command
+==20429==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=20429
+==20429== --pid is optional if only one valgrind process is running
+==20429== 
+--20429-- REDIR: 0x401d2a0 (ld-linux-x86-64.so.2:strlen) redirected to 0x3809e181 (???)
+--20429-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--20429--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--20429--   .. CRC mismatch (computed 2567ccf6 wanted 49420590)
+--20429--    object doesn't have a symbol table
+--20429-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--20429--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--20429--   .. CRC mismatch (computed 0e27c9a8 wanted ac585421)
+--20429--    object doesn't have a symbol table
+==20429== WARNING: new redirection conflicts with existing -- ignoring it
+--20429--     old: 0x0401d2a0 (strlen              ) R-> (0000.0) 0x3809e181 ???
+--20429--     new: 0x0401d2a0 (strlen              ) R-> (2007.0) 0x04c31020 strlen
+--20429-- REDIR: 0x401bb50 (ld-linux-x86-64.so.2:index) redirected to 0x4c30bc0 (index)
+--20429-- REDIR: 0x401bd70 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c320d0 (strcmp)
+--20429-- REDIR: 0x401ddb0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35270 (mempcpy)
+--20429-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22
+--20429--   Considering /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22 ..
+--20429--   .. CRC mismatch (computed f51b0c3a wanted 3b62a014)
+--20429--    object doesn't have a symbol table
+--20429-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--20429--   Considering /lib/x86_64-linux-gnu/libgcc_s.so.1 ..
+--20429--   .. CRC mismatch (computed dd5abcf5 wanted 99476d76)
+--20429--    object doesn't have a symbol table
+--20429-- Reading syms from /lib/x86_64-linux-gnu/libc-2.24.so
+--20429--   Considering /lib/x86_64-linux-gnu/libc-2.24.so ..
+--20429--   .. CRC mismatch (computed 0a29ea31 wanted 23a88049)
+--20429--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.24.so ..
+--20429--   .. CRC is valid
+--20429-- Reading syms from /lib/x86_64-linux-gnu/libm-2.24.so
+--20429--   Considering /lib/x86_64-linux-gnu/libm-2.24.so ..
+--20429--   .. CRC mismatch (computed 778cfa58 wanted 27a976e8)
+--20429--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libm-2.24.so ..
+--20429--   .. CRC is valid
+--20429-- REDIR: 0x546ac80 (libc.so.6:strcasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x54665f0 (libc.so.6:strcspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x546cf70 (libc.so.6:strncasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x5468a60 (libc.so.6:strpbrk) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x5468df0 (libc.so.6:strspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x546a300 (libc.so.6:memmove) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x54664d0 (libc.so.6:strcpy) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x5468770 (libc.so.6:rindex) redirected to 0x4c308a0 (rindex)
+--20429-- REDIR: 0x545f990 (libc.so.6:malloc) redirected to 0x4c2db20 (malloc)
+--20429-- REDIR: 0x5466a90 (libc.so.6:strlen) redirected to 0x4c30f60 (strlen)
+--20429-- REDIR: 0x5469f00 (libc.so.6:__GI_memcmp) redirected to 0x4c33b90 (__GI_memcmp)
+--20429-- REDIR: 0x5465040 (libc.so.6:strcmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x547a120 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c31f90 (strcmp)
+--20429-- REDIR: 0x4ec9bc0 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x4c2e7a0 (operator new[](unsigned long))
+==20429== Conditional jump or move depends on uninitialised value(s)
+==20429==    at 0x4C30F69: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109441: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Uninitialised value was created by a heap allocation
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x1093F3: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+--20429-- REDIR: 0x5471020 (libc.so.6:strchrnul) redirected to 0x4c34da0 (strchrnul)
+==20429== Invalid write of size 1
+==20429==    at 0x544A629: vsprintf (iovsprintf.c:43)
+==20429==    by 0x542F716: sprintf (sprintf.c:32)
+==20429==    by 0x109461: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abac83 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x1093F3: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+--20429-- REDIR: 0x547ed70 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c31040 (strcpy)
+==20429== Invalid read of size 1
+==20429==    at 0x4C31063: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109532: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abac83 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x1093F3: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+--20429-- REDIR: 0x4ec7b20 (libstdc++.so.6:operator delete[](void*)) redirected to 0x4c2f6e0 (operator delete[](void*))
+==20429== Conditional jump or move depends on uninitialised value(s)
+==20429==    at 0x4C30F69: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F37: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Uninitialised value was created by a heap allocation
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F1D: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== Invalid write of size 1
+==20429==    at 0x544A629: vsprintf (iovsprintf.c:43)
+==20429==    by 0x542F716: sprintf (sprintf.c:32)
+==20429==    by 0x10A056: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abacd3 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F1D: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== Invalid read of size 1
+==20429==    at 0x4C31063: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x10A075: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abacd3 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F1D: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+--20429-- REDIR: 0x546f670 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x546a410 (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4c32230 (memcpy@GLIBC_2.2.5)
+--20429-- REDIR: 0x5469b70 (libc.so.6:memchr) redirected to 0x4c32170 (memchr)
+--20429-- REDIR: 0x5469ec0 (libc.so.6:bcmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--20429-- REDIR: 0x5544630 (libc.so.6:__memcmp_sse4_1) redirected to 0x4c33cd0 (__memcmp_sse4_1)
+--20429-- REDIR: 0x545fd40 (libc.so.6:free) redirected to 0x4c2ed80 (free)
+==20429== 
+==20429== HEAP SUMMARY:
+==20429==     in use at exit: 72,704 bytes in 1 blocks
+==20429==   total heap usage: 4 allocs, 3 frees, 73,734 bytes allocated
+==20429== 
+==20429== Searching for pointers to 1 not-freed blocks
+==20429== Checked 115,568 bytes
+==20429== 
+==20429== 72,704 bytes in 1 blocks are still reachable in loss record 1 of 1
+==20429==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x4EC5ADF: ??? (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.22)
+==20429==    by 0x4010979: call_init.part.0 (dl-init.c:72)
+==20429==    by 0x4010A8A: call_init (dl-init.c:30)
+==20429==    by 0x4010A8A: _dl_init (dl-init.c:120)
+==20429==    by 0x4000C59: ??? (in /lib/x86_64-linux-gnu/ld-2.24.so)
+==20429==    by 0x1: ???
+==20429==    by 0xFFF00012A: ???
+==20429==    by 0xFFF000131: ???
+==20429== 
+==20429== LEAK SUMMARY:
+==20429==    definitely lost: 0 bytes in 0 blocks
+==20429==    indirectly lost: 0 bytes in 0 blocks
+==20429==      possibly lost: 0 bytes in 0 blocks
+==20429==    still reachable: 72,704 bytes in 1 blocks
+==20429==         suppressed: 0 bytes in 0 blocks
+==20429== 
+==20429== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+==20429== 
+==20429== 1 errors in context 1 of 6:
+==20429== Invalid read of size 1
+==20429==    at 0x4C31063: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x10A075: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abacd3 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F1D: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== 
+==20429== 1 errors in context 2 of 6:
+==20429== Invalid write of size 1
+==20429==    at 0x544A629: vsprintf (iovsprintf.c:43)
+==20429==    by 0x542F716: sprintf (sprintf.c:32)
+==20429==    by 0x10A056: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abacd3 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F1D: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== 
+==20429== 1 errors in context 3 of 6:
+==20429== Conditional jump or move depends on uninitialised value(s)
+==20429==    at 0x4C30F69: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F37: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Uninitialised value was created by a heap allocation
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109F1D: normalize(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x10927D: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== 
+==20429== 1 errors in context 4 of 6:
+==20429== Invalid read of size 1
+==20429==    at 0x4C31063: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109532: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abac83 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x1093F3: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== 
+==20429== 1 errors in context 5 of 6:
+==20429== Invalid write of size 1
+==20429==    at 0x544A629: vsprintf (iovsprintf.c:43)
+==20429==    by 0x542F716: sprintf (sprintf.c:32)
+==20429==    by 0x109461: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Address 0x5abac83 is 0 bytes after a block of size 3 alloc'd
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x1093F3: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== 
+==20429== 1 errors in context 6 of 6:
+==20429== Conditional jump or move depends on uninitialised value(s)
+==20429==    at 0x4C30F69: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x109441: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==  Uninitialised value was created by a heap allocation
+==20429==    at 0x4C2E80F: operator new[](unsigned long) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==20429==    by 0x1093F3: del_space(char*) (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429==    by 0x109271: main (in /home/osboxes/Tehnosphere/Git/01/calc)
+==20429== 
+==20429== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)

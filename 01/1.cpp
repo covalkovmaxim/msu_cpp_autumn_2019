@@ -7,22 +7,22 @@
 
 using namespace std;
 
-void del_space(char *s);
-void normalize(char*s);
-int get_number_by_string(string s);
-int calculate(string s);
-string get_left_substring(string s, int pos);
-string get_right_substring(string s, int pos);
+string del_space(char *s);
+string normalize(string &s);
+int get_number_by_string(string & s);
+int calculate(string const&s1);
+string get_left_substring(string &s, int pos);
+string get_right_substring(string &s, int pos);
 int main(int argc,char*argv[])
 {
     char*s=argv[1];
 
     try
     {
-        del_space(s);
-        normalize(s);
-        string str(s);
-        cout<<calculate(str);
+        string without_space=del_space(s);
+        string normalize_string=normalize(without_space);
+        string str(normalize_string);
+        cout<<calculate(normalize_string);
 
     }
     catch(const exception& ex)
@@ -34,26 +34,26 @@ int main(int argc,char*argv[])
     return 0;
 }
 
-void del_space(char*s)
+string del_space(char*s)
 {
-    char*sc;
+    string new_string="";
     int len=strlen(s);
-    sc=new char[len];
+
     for(int i=0;i<len;i++)
     {
         if(s[i]!=' ')
         {
-            sprintf(sc+strlen(sc),"%c",s[i]);
+            new_string+=s[i];
             if(s[i]!='+'&&s[i]!='-'&&s[i]!='/'&&s[i]!='*'&&(s[i]>'9'||s[i]<'0'))
             {
                throw(runtime_error("invalid input"));
             }
         }
     }
-    sprintf(s,"%s",sc);
-    delete[]sc;
+
+    return new_string;
 }
-int get_number_by_string(string s)
+int get_number_by_string(string& s)
 {
     int res=0;int key=1;
     int len=s.size();
@@ -76,10 +76,11 @@ int get_number_by_string(string s)
     //printf("res=%d\n",key*res);
     return key*res;
 }
-int calculate(string s)
+int calculate(string const&s1)
 {
     //printf("%s %d\n",s,strlen(s));
     //cout << s <<"result=";
+    string s(s1);
     int left,right;
 
     if(s.size()==0)
@@ -123,12 +124,19 @@ int calculate(string s)
   //  cout<< s<<"res="<<left/right << endl;
     return left/right;
 }
-void normalize(char*s)
+string normalize(string& s)
 {
-    char*sc;
-    int len=strlen(s);
-    sc=new char[len];
-    sprintf(sc+strlen(sc),"%c",s[0]);
+    string new_string="";
+    int len=s.size();
+    if(len>=1)
+    {
+        new_string+=s[0];
+    }
+    else
+    {
+        throw(runtime_error("empty input"));
+    }
+
     for(int i=1;i<len;i++)
     {
         if(s[i]=='+'&&(s[i-1]>'9'||s[i-1]<'0'))
@@ -137,21 +145,22 @@ void normalize(char*s)
         }
         if(s[i]=='-'&&s[i-1]<='9'&&s[i-1]>='0')
         {
-            sprintf(sc+strlen(sc),"+-");
+            new_string+="+-";
+
             continue;
         }
-        sprintf(sc+strlen(sc),"%c",s[i]);
+        new_string+=s[i];
+
     }
-    sprintf(s,"%s",sc);
-    delete[]sc;
+    return new_string;
 }
 
-string get_left_substring(string s, int pos)
+string get_left_substring(string &s, int pos)
 {
     return s.substr(0,pos);
 }
 
-string get_right_substring(string s, int pos)
+string  get_right_substring(string &s, int pos)
 {
     return s.substr(pos+1, s.size()-pos-1);
 }
