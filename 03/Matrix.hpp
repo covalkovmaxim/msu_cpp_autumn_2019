@@ -1,57 +1,61 @@
+#pragma once
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
 #include<iostream>
-class Matrix;
-class ProcsiMatrix
+#include<assert.h>
+#include<string>
+#include<string.h>
+
+class MatrixRow
 {
-  private:
+    int cols;
+    int* row;
 
-    int*position;
+    public:
 
-  public:
-    friend class Matrix;
-    ProcsiMatrix(int* pos)
-    {
-        position=pos;
-    }
-    int& operator[](const int val)
-    {
-        return position[val];
-    }
+    MatrixRow(int ColsNumber);
+    MatrixRow(MatrixRow& InitRow);
+
+    MatrixRow& operator *= (int val);
+    MatrixRow& operator += (int val);
+
+    bool operator == (const MatrixRow& m) const;
+    bool operator != (const MatrixRow& m) const;
+
+    int& operator[](const int index);
+    int operator[](const int index) const;
+
+    int getColumns();
+    void print();
+
+    ~MatrixRow();
+
 };
 class Matrix
 {
-    public:
-
-    friend class ProcsiMatrix;
-
-    private:
-
-        int cols,rows;
-        int* data;
-
+    int cols,rows;
+    MatrixRow ** data;
 
     public:
 
+    Matrix(int RowsNumber,int ColsNumber);
+    Matrix(Matrix& InitMatrix);
 
-        Matrix(Matrix & InitMatrix);
-        Matrix(int row,int col);
+    Matrix& operator *= (int val);
+    Matrix& operator += (int val);
 
+    bool operator == (const Matrix& m) const;
+    bool operator != (const Matrix& m) const;
 
-        int getColumns() const;
-        int getRows() const;
+    MatrixRow& operator [] (const int index);
+    MatrixRow operator [] (const int index) const;
 
-        Matrix& operator *= (int val);
-        Matrix& operator += (int val);
+    int getColumns();
+    int getRows();
+    void print();
 
-        bool operator == (const Matrix& m) const;
-        bool operator != (const Matrix& m) const;
-
-        ProcsiMatrix& operator[](const int val);
-
-        void Print();
-        ~Matrix();
-
+    ~Matrix();
 };
 

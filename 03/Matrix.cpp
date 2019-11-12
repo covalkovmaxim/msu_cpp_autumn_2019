@@ -1,54 +1,129 @@
 #include"Matrix.hpp"
 
-Matrix:: Matrix(Matrix& InitMatrix)
+MatrixRow::MatrixRow(int ColsNumber)
 {
-    cols=InitMatrix.cols;
-    rows=InitMatrix.rows;
-    data=new int[cols*rows];
-    for (int i=0;i<cols*rows;i++)
+    cols=ColsNumber;
+    row=new int[cols];
+    for(int i=0;i<cols;i++)
     {
-        data[i]=InitMatrix.data[i];
+        row[i]=0;
     }
 }
-Matrix:: Matrix(int row, int col)
+MatrixRow::MatrixRow(MatrixRow& InitRow)
 {
-    cols=col;
-    rows=row;
-    data=new int[cols*rows];
-    for (int i=0;i<cols*rows;i++)
+
+    cols=InitRow.cols;
+
+    row=new int[cols];
+    for(int i=0;i<cols;i++)
     {
-        data[i]=0;
+        row[i]=InitRow.row[i];
     }
-
 }
-Matrix:: ~Matrix()
+MatrixRow& MatrixRow:: operator *= (int val)
 {
-    delete [] data;
+    for(int i=0;i<cols;i++)
+    {
+        row[i]*=val;
+    }
+    return *this;
 }
+MatrixRow& MatrixRow:: operator += (int val)
+{
+    for(int i=0;i<cols;i++)
+    {
+        row[i]+=val;
+    }
+    return *this;
+}
+bool MatrixRow::operator == (const MatrixRow& m) const
+{
+    if(cols!=m.cols)
+    {
+        return false;
+    }
+    for(int i=0;i<cols;i++)
+    {
+        if(row[i]!=m.row[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool MatrixRow::operator != (const MatrixRow& m) const
+{
+    return !(*this==m);
+}
+int& MatrixRow::operator[](const int index)
+{
+    if(index>=cols)
+    {
+        throw std::out_of_range("out of range");
+    }
+    return row[index];
 
-int Matrix:: getColumns() const
+}
+int MatrixRow::operator[](const int index) const
+{
+    if(index>=cols)
+    {
+        throw std::out_of_range("out of range");
+    }
+    return row[index];
+}
+int MatrixRow::getColumns()
 {
     return cols;
 }
-int Matrix:: getRows() const
+MatrixRow::~MatrixRow()
 {
-    return rows;
+    delete [] row;
 }
-Matrix& Matrix::operator *= (int val)
+void MatrixRow::print()
 {
-    for(int i=0;i<rows*cols;i++)
+
+    for(int i=0;i<cols;i++)
     {
-        data[i]*=val;
+        printf("%d ",row[i]);
     }
-    return *this;
+
+}
+Matrix::Matrix(int RowsNumber,int ColsNumber)
+{
+    cols=ColsNumber;
+    rows=RowsNumber;
+    data=new MatrixRow*[rows];
+    for(int i=0;i<rows;i++)
+    {
+        data[i]=new MatrixRow(cols);
+    }
+}
+Matrix::Matrix(Matrix& InitMatrix)
+{
+
+    cols=InitMatrix.cols;
+    rows=InitMatrix.rows;
+    data=new MatrixRow*[rows];
+    for(int i=0;i<rows;i++)
+    {
+        data[i]=new MatrixRow(*InitMatrix.data[i]);
+    }
+}
+
+Matrix& Matrix::operator  *= (int val)
+{
+    for(int i=0;i<rows;i++)
+    {
+        *data[i]*=val;
+    }
 }
 Matrix& Matrix::operator += (int val)
 {
-    for(int i=0;i<rows*cols;i++)
+    for(int i=0;i<rows;i++)
     {
-        data[i]+=val;
+        *data[i]+=val;
     }
-    return *this;
 }
 bool Matrix::operator == (const Matrix& m) const
 {
@@ -56,14 +131,11 @@ bool Matrix::operator == (const Matrix& m) const
     {
         return false;
     }
-    else
+    for(int i=0;i<rows;i++)
     {
-        for(int i=0;i<cols*rows;i++)
+        if(*data[i]!=*m.data[i])
         {
-            if(data[i]!=m.data[i])
-            {
-                return false;
-            }
+            return false;
         }
     }
     return true;
@@ -72,23 +144,45 @@ bool Matrix:: operator != (const Matrix& m) const
 {
     return !(*this==m);
 }
-void Matrix:: Print()
+MatrixRow& Matrix:: operator [] (const int index)
+{
+    if(index>=rows)
+    {
+        throw std::out_of_range("out of range");
+    }
+    return *data[index];
+}
+MatrixRow Matrix:: operator [] (const int index) const
+{
+    if(index>=rows)
+    {
+        throw std::out_of_range("out of range");
+    }
+    return *data[index];
+}
+int Matrix:: getColumns()
+{
+    return cols;
+}
+int Matrix:: getRows()
+{
+    return rows;
+}
+void Matrix::print()
 {
     printf("\n");
     for(int i=0;i<rows;i++)
     {
-        for(int j=0;j<cols;j++)
-        {
-            printf("%d ",data[i*cols+j]);
-        }
+        data[i]->print();
         printf("\n");
     }
 }
 
-ProcsiMatrix& Matrix::  operator [](const int val)
+Matrix::~Matrix()
 {
-
-    return data+cols*val;
+    for(int i=0;i<rows;i++)
+    {
+        delete data[i];
+    }
+    delete[]data;
 }
-
-
