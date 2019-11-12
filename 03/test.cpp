@@ -47,16 +47,16 @@ int main()
         {
             if(string("out of range")==e.what())
             {
-                cout << "3nd test is OK" << endl;
+                cout << "4th test is OK" << endl;
             }
             else
             {
-                 cout << "3nd test is Wrong" << endl;
+                 cout << "4th test is Wrong" << endl;
             }
         }
         Matrix m1=m;
         assert(m==m1);
-        cout << "4th test is OK" << endl;
+        cout << "5th test is OK" << endl;
         for(int i=0;i<rows;i++)
         {
             for(int j=0;j<cols;j++)
@@ -65,9 +65,9 @@ int main()
                 assert(m[i][j]==i*cols+j);
             }
         }
-        cout << "5th test is OK" <<endl;
-        assert(m!=m1);
         cout << "6th test is OK" <<endl;
+        assert(m!=m1);
+        cout << "7th test is OK" <<endl;
 
     }
     catch(const std::exception & e)
