@@ -8,5 +8,5 @@ test.o: test.cpp BigInt.hpp
 	g++ -c test.cpp
 test: test.o BigInt.o
 	g++ test.o BigInt.o -o test
-	./test
+	valgrind  --leak-check=full ./test
 

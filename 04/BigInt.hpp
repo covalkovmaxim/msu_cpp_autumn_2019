@@ -16,13 +16,14 @@ class BigInt
     public:
         BigInt(int num);
         BigInt(const char* s);
+        BigInt(bool neg,int n,int*ar);
         BigInt(const BigInt& InitBigInt);
-        BigInt(BigInt& InitBigInt);
+        //BigInt(BigInt& InitBigInt);
 
         BigInt operator-() const;
 
         BigInt& operator=(const BigInt& copied);
-        BigInt& operator=(const int& copied);
+        BigInt& operator=(const int copied);
 
         bool operator>(const BigInt& RightPart) const;
         bool operator>(const int & RightPart) const;
@@ -55,3 +56,8 @@ class BigInt
         ~BigInt();
 
 };
+BigInt operator+(const int left, const BigInt & right);
+BigInt operator+(const char* left, const BigInt & right);
+BigInt operator-(const int left, const BigInt & right);
+BigInt operator-(const char* left, const BigInt & right);
+

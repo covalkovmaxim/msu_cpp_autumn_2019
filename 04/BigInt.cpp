@@ -1,4 +1,20 @@
 #include"BigInt.hpp"
+BigInt operator+(const int left, const BigInt & right)
+{
+    return right+left;
+}
+BigInt operator+(const char* left, const BigInt & right)
+{
+    return right+left;
+}
+BigInt operator-(const int left, const BigInt & right)
+{
+    return -(right-left);
+}
+BigInt operator-(const char* left, const BigInt & right)
+{
+    return -(right-left);
+}
 
 BigInt::BigInt(int num)
 {
@@ -26,6 +42,16 @@ BigInt::BigInt(int num)
             len++;
             num/=10;
         }
+    }
+}
+BigInt::BigInt(bool neg,int n,int*ar)
+{
+    negative=neg;
+    len=n;
+    array=new int[len];
+    for(int i=0;i<len;i++)
+    {
+        array[i]=ar[i];
     }
 }
 BigInt::BigInt(const char* s)
@@ -57,6 +83,7 @@ BigInt::BigInt(const char* s)
 }
 BigInt::BigInt(const BigInt& InitBigInt)
 {
+
     negative=InitBigInt.negative;
     len=InitBigInt.len;
     array=new int[len];
@@ -64,9 +91,11 @@ BigInt::BigInt(const BigInt& InitBigInt)
     {
         array[i]=InitBigInt.array[i];
     }
+
 }
-BigInt::BigInt(BigInt& InitBigInt)
+/*BigInt::BigInt(BigInt& InitBigInt)
 {
+    std::cout << "nonconst\n";
     negative=InitBigInt.negative;
     len=InitBigInt.len;
     array=new int[len];
@@ -74,7 +103,9 @@ BigInt::BigInt(BigInt& InitBigInt)
     {
         array[i]=InitBigInt.array[i];
     }
+
 }
+*/
 BigInt BigInt:: operator-() const
 {
     BigInt cur(*this);
@@ -101,10 +132,22 @@ BigInt& BigInt::operator=(const BigInt& copied)
     }
     return *this;
 }
-BigInt& BigInt::operator=(const int& copied)
+BigInt& BigInt::operator=(const int copied)
 {
     BigInt cur(copied);
-    *this=cur;
+    if (this == &cur)
+    {
+        return *this;
+    }
+    int* ptr = new int[cur.len];
+    delete[] array;
+    array = ptr;
+    len = cur.len;
+    negative=cur.negative;
+    for(int i=0;i<len;i++)
+    {
+        array[i]=cur.array[i];
+    }
     return *this;
 }
 
@@ -238,16 +281,7 @@ BigInt BigInt::operator+(const BigInt& RightPart) const
             }
         }
         result[maxlen]=ost;
-        BigInt res(*this);
-        int *ptr=new int [maxlen+1];
-        delete[] res.array;
-        res.array=ptr;
-        for(int i=0;i<maxlen+1;i++)
-        {
-            res.array[i]=result[i];
-        }
-        res.len=result[maxlen]>0?maxlen+1:maxlen;
-
+        const BigInt res(false,result[maxlen]>0?maxlen+1:maxlen,result);
         delete[]result;
         return res;
     }
@@ -309,15 +343,7 @@ BigInt BigInt::operator-(const BigInt& RightPart) const
                 break;
             }
         }
-        BigInt res(*this);
-        int *ptr=new int [maxlen];
-        delete[] res.array;
-        res.array=ptr;
-        for(int i=0;i<maxlen;i++)
-        {
-            res.array[i]=result[i];
-        }
-        res.len=maxlen;
+        const BigInt res(false,maxlen,result);
         delete[]result;
         return res;
     }
@@ -356,3 +382,5 @@ BigInt::~BigInt()
 {
     delete [] array;
 }
+
+

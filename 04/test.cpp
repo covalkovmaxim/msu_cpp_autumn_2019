@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<assert.h>
 using namespace std;
+
 int main()
 {
     try
@@ -123,7 +124,7 @@ int main()
                BigInt("-1898547418402642082861685678926313040329324665444")==
                "5986802925917037204006860370816178476385956044910");
         printf("28th test is OK\n");
-
+\
         assert(BigInt("-3263451055881572237653188065690360504592817148154")+
                BigInt("-8414028480695132353882688708588758644159621411192")==
                "-11677479536576704591535876774279119148752438559346");
@@ -134,6 +135,20 @@ int main()
                "778537874624181751313914080462215964945043093996");
         printf("30th test is OK\n");
 
+        assert(77+BigInt(1000)==1077);
+        printf("31th test is OK\n");
+
+        assert(77-BigInt(1000)==-923);
+        printf("32th test is OK\n");
+
+        assert("77"+BigInt(1000)==1077);
+        printf("33th test is OK\n");
+
+        assert("77"-BigInt(1000)==-923);
+        printf("34th test is OK\n");
+
+        assert(77+BigInt(1000)=="1077");
+        printf("35th test is OK\n");
 
     }
     catch(const std::exception & e)
