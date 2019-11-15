@@ -1,6 +1,6 @@
 #include"Matrix.hpp"
 
-MatrixRow::MatrixRow(int ColsNumber)
+MatrixRow::MatrixRow(const size_t ColsNumber)
 {
     cols=ColsNumber;
     row=new int[cols];
@@ -9,7 +9,7 @@ MatrixRow::MatrixRow(int ColsNumber)
         row[i]=0;
     }
 }
-MatrixRow::MatrixRow(MatrixRow& InitRow)
+MatrixRow::MatrixRow(const MatrixRow& InitRow)
 {
 
     cols=InitRow.cols;
@@ -89,7 +89,7 @@ void MatrixRow::print()
     }
 
 }
-Matrix::Matrix(int RowsNumber,int ColsNumber)
+Matrix::Matrix(const size_t RowsNumber,const size_t ColsNumber)
 {
     cols=ColsNumber;
     rows=RowsNumber;
@@ -99,7 +99,7 @@ Matrix::Matrix(int RowsNumber,int ColsNumber)
         data[i]=new MatrixRow(cols);
     }
 }
-Matrix::Matrix(Matrix& InitMatrix)
+Matrix::Matrix(const Matrix& InitMatrix)
 {
 
     cols=InitMatrix.cols;
@@ -117,6 +117,7 @@ Matrix& Matrix::operator  *= (int val)
     {
         *data[i]*=val;
     }
+    return *this;
 }
 Matrix& Matrix::operator += (int val)
 {
@@ -124,6 +125,7 @@ Matrix& Matrix::operator += (int val)
     {
         *data[i]+=val;
     }
+    return *this;
 }
 bool Matrix::operator == (const Matrix& m) const
 {
@@ -152,7 +154,7 @@ MatrixRow& Matrix:: operator [] (const int index)
     }
     return *data[index];
 }
-MatrixRow Matrix:: operator [] (const int index) const
+MatrixRow& Matrix:: operator [] (const int index) const
 {
     if(index>=rows)
     {

@@ -10,13 +10,13 @@
 
 class MatrixRow
 {
-    int cols;
+    size_t cols;
     int* row;
 
     public:
 
-    MatrixRow(int ColsNumber);
-    MatrixRow(MatrixRow& InitRow);
+    MatrixRow(const size_t ColsNumber);
+    MatrixRow(const MatrixRow& InitRow);
 
     MatrixRow& operator *= (int val);
     MatrixRow& operator += (int val);
@@ -35,13 +35,13 @@ class MatrixRow
 };
 class Matrix
 {
-    int cols,rows;
+    size_t cols,rows;
     MatrixRow ** data;
 
     public:
 
-    Matrix(int RowsNumber,int ColsNumber);
-    Matrix(Matrix& InitMatrix);
+    Matrix(const size_t RowsNumber,const size_t ColsNumber);
+    Matrix(const Matrix& InitMatrix);
 
     Matrix& operator *= (int val);
     Matrix& operator += (int val);
@@ -50,7 +50,7 @@ class Matrix
     bool operator != (const Matrix& m) const;
 
     MatrixRow& operator [] (const int index);
-    MatrixRow operator [] (const int index) const;
+    MatrixRow& operator [] (const int index) const;
 
     int getColumns();
     int getRows();
