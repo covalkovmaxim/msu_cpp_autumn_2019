@@ -50,7 +50,7 @@ class Matrix
     bool operator != (const Matrix& m) const;
 
     MatrixRow& operator [] (const int index);
-    MatrixRow& operator [] (const int index) const;
+    const MatrixRow& operator [] (const int index) const;
 
     int getColumns();
     int getRows();

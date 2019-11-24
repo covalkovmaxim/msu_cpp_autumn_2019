@@ -154,7 +154,7 @@ MatrixRow& Matrix:: operator [] (const int index)
     }
     return *data[index];
 }
-MatrixRow& Matrix:: operator [] (const int index) const
+const MatrixRow& Matrix:: operator [] (const int index) const
 {
     if(index>=rows)
     {
