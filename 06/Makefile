@@ -1,5 +1,3 @@
-run: main.cpp Format.h
-	g++ main.cpp -o run
-test: test.cpp Format.h
+test: test.cpp
 	g++ test.cpp -o test
 	./test
