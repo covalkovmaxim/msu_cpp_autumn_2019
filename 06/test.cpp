@@ -183,14 +183,13 @@ int main()
     }
 
 
-        const std::string& name="Maxim";
-        int age=22;
-        const std::string&& lang="Russian";
+    const std::string& name="Maxim";
+    int age=22;
+    const std::string&& lang="Russian";
 
-        text = format("My name is {1}. My age is {0} years. My nature language is {2}. My English is very bad. But I learn it {3} years",age,name,lang, age/2);
-        assert(text == "My name is Maxim. My age is 22 years. My nature language is Russian. My English is very bad. But I learn it 11 years");
-        std::cout << "10th test is OK" << std::endl;
-
+    text = format("My name is {1}. My age is {0} years. My nature language is {2}. My English is very bad. But I learn it {3} years",age,name,lang, age/2);
+    assert(text == "My name is Maxim. My age is 22 years. My nature language is Russian. My English is very bad. But I learn it 11 years");
+    std::cout << "10th test is OK" << std::endl;
 
     std::cout << "All tests are OK" << std:: endl;
     return 0;
